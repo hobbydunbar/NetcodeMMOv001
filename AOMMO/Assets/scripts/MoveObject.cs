@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class MoveObject : MonoBehaviour
 {
-    public float rspeed = 1f;
-    public float tspeed = 1.0f;
+    public float rspeed = 100f;
+    public float tspeed = 10f;
+    public float jumpSpeed = 10f;
 
     void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        transform.position += new Vector3(0, 0, verticalInput) * tspeed * Time.deltaTime;
-        transform.Rotate((Vector3.up * horizontalInput * Time.deltaTime)*(rspeed));
+        transform.Translate(Vector3.forward * verticalInput * tspeed * Time.deltaTime, Space.Self);
+        transform.RotateAround(transform.position, transform.up, horizontalInput * rspeed * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.up * jumpSpeed;
+        }
     }
 }
