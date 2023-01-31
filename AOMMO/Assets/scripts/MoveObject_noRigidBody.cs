@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class MoveObject_CharacterController : MonoBehaviour
 {
-    public float rspeed = 100f;
+    public float rspeedkeyboard = 100f;
+    public float rspeedmouse = 1000f;
     public float tspeed = 10f;
     public float strafespeed = 10f;
     public float jumpForce = 10f;
@@ -25,10 +26,13 @@ public class MoveObject_CharacterController : MonoBehaviour
         {
             float strafeInput = Input.GetAxis("Horizontal");
             movement += transform.right * strafeInput * strafespeed * Time.deltaTime;
+
+            float mouseX = Input.GetAxis("Mouse X");
+            transform.RotateAround(transform.position, transform.up, mouseX * rspeedmouse * Time.deltaTime);
         }
         else
         {
-            transform.RotateAround(transform.position, transform.up, horizontalInput * rspeed * Time.deltaTime);
+            transform.RotateAround(transform.position, transform.up, horizontalInput * rspeedkeyboard * Time.deltaTime);
         }
 
         if (characterController.isGrounded && Input.GetKeyDown(KeyCode.Space))

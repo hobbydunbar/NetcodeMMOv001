@@ -14,7 +14,7 @@ public class CameraZoom : MonoBehaviour
     distance -= scroll * zoomSpeed;
     distance = Mathf.Clamp(distance, -5f, 50f);
 
-    if (Input.GetMouseButton(1))
+    if (Input.GetMouseButton(0))
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
